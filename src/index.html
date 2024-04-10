@@ -134,8 +134,8 @@
     
     const resultTemplate = `<div class="col-xs-12 col-sm-9 col-md-9">
         <h4>{{NombreProducto}}</h4>
-        <div class="resultDescription">{{{DescripcionProveedor}}}</div>
-        <div class="resultDescription">{{{Precio}}}€ {{{UnidadMedidaProveedor}}}</div>
+        <div class="resultDescription">{{{DescripcionProveedor}}} <span style="color:grey;font-weight:bold;"> - {{{Proveedor}}} </span></div>
+        <div class="resultDescription">{{{Precio}}}&euro; &#47; {{{UnidadMedidaProveedor}}}</div>
         </div>`;
 
     // add a results view using the template defined above
@@ -155,8 +155,7 @@
     automagic.store.setSuggestionsProcessor(suggestionsProcessor);
 
     var suggestionsTemplate = `
-            <p> IDProducto: {{IDProducto}} </p>
-            <p> ReferenciaProveedor: {{ReferenciaProveedor}} </p> {{{searchText}}}`;
+             <p> {{Proveedor}} </p> {{{searchText}}}`;
 
     // Add a search box that uses suggester "azuresql-index-sg", grabbing some additional fields to display during suggestions. Use the template defined above
     automagic.addSearchBox("searchBox",
@@ -164,7 +163,7 @@
             highlightPreTag: "<b>",
             highlightPostTag: "</b>",
             suggesterName: "azuresql-index-sg",
-            select: "IDProducto,ReferenciaProveedor"
+            select: "NombreProducto, Proveedor"
         },
         "",
         suggestionsTemplate);
