@@ -74,6 +74,7 @@
                                 <div id="SectorFacet">
                                 </div>
                             </li>
+                             <!--
                             <li>
                                 <div id="UnidadMedidaFacet">
                                 </div>
@@ -82,7 +83,7 @@
                                 <div id="UnidadMedidaProveedorFacet">
                                 </div>
                             </li>
-                            <!--
+                           
                             <li>
                                 <div id="PrecioFacet">
                                 </div>
@@ -134,8 +135,9 @@
     
     const resultTemplate = `<div class="col-xs-12 col-sm-9 col-md-9">
         <h4>{{NombreProducto}}</h4>
-        <div class="resultDescription">{{{DescripcionProveedor}}} <span style="color:grey;font-weight:bold;"> - {{{Proveedor}}} </span></div>
-        <div class="resultDescription">{{{Precio}}}&euro; &#47; {{{UnidadMedidaProveedor}}}</div>
+        <div class="resultDescription">{{{DescripcionProveedor}}} <span style="color:grey;font-weight:bold;"> - {{{IDProducto}}}  </span></div>
+        <div class="resultDescription"><span style="color:grey;font-weight:bold;font-size:18px">{{{Precio}}}&euro; {{UnidadMedidaProveedor}}</span></div>
+        <hr width="100%" size="1" color="grey" noshade style="margin-bottom:0px; ">
         </div>`;
 
     // add a results view using the template defined above
@@ -180,10 +182,10 @@
     startDate.setFullYear(1975);
     var endDate = new Date();
     automagic.addRangeFacet("FechaFinVigenciaPrecioFacet", "FechaFinVigenciaPrecio", "date", startDate, endDate);
-   */
+   
    automagic.addCheckboxFacet("UnidadMedidaFacet", "UnidadMedida", "string");
    automagic.addCheckboxFacet("UnidadMedidaProveedorFacet", "UnidadMedidaProveedor", "string");
-
+*/
    automagic.addCheckboxFacet("SectorFacet", "Sector", "string");
    automagic.addCheckboxFacet("GrupoFacet", "Grupo", "string");
 
