@@ -163,9 +163,8 @@
 
     var suggestionsTemplate = `
     <p>{{{searchText}}} </p> 
-    <p>{{NombreProducto}}</p>
-    <div class="resultDescription">{{{DescripcionProveedor}}} <span style="color:grey;font-weight:bold;"> - {{{IDProducto}}}  </span></div>
-    <div class="resultDescription"><span style="color:grey;font-weight:bold;font-size:18px">{{{Precio}}}&euro; {{UnidadMedidaProveedor}} <span style="color:grey;font-size:12px"> ({{{PrecioPorUnidad}}}&euro; {{UnidadMedidaPrecio}})</span></span><span style="color:orange;font-size:12"> {{MejorPrecio}} </span></div> `;
+    <p>{{{DescripcionProveedor}}} <span style="color:grey;font-weight:bold;"> - {{{IDProducto}}}  </span></p>
+    <p><span style="color:grey;font-weight:bold;font-size:18px">{{{Precio}}}&euro; {{UnidadMedidaProveedor}}</span> <span style="color:grey;font-size:12px"> ({{{PrecioPorUnidad}}}&euro; {{UnidadMedidaPrecio}})</span><span style="color:orange;font-size:12"> {{MejorPrecio}} </span></p> `;
 
     // Add a search box that uses suggester "azuresql-index-sg", grabbing some additional fields to display during suggestions. Use the template defined above
     automagic.addSearchBox("searchBox",
