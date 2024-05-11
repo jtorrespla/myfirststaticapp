@@ -63,6 +63,10 @@
                             </li>
                             -->
                             <li>
+                                <div id="MejorPrecioFacet">
+                                </div>
+                            </li>
+                            <li>
                                 <div id="ProveedorFacet">
                                 </div>
                             </li>
@@ -131,12 +135,13 @@
     // CORS (*) must be enabled in the index before using the demo app.
 
     // Initialize and connect to your search service
-    var automagic = new AzSearch.Automagic({ index: "azuresql-index", queryKey: "OLLxpbK6NtentHahMZjRolO4r9TsVopHHmUMt1wvYjAzSeB3yjpr", service: "azure-app-search", dnsSuffix:"search.windows.net" });
+    var automagic = new AzSearch.Automagic({ index: "azuresql-index-test", queryKey: "OLLxpbK6NtentHahMZjRolO4r9TsVopHHmUMt1wvYjAzSeB3yjpr", service: "azure-app-search", dnsSuffix:"search.windows.net" });
     
     const resultTemplate = `<div class="col-xs-12 col-sm-9 col-md-9">
         <h4>{{NombreProducto}}</h4>
         <div class="resultDescription">{{{DescripcionProveedor}}} <span style="color:grey;font-weight:bold;"> - {{{IDProducto}}}  </span></div>
-        <div class="resultDescription"><span style="color:grey;font-weight:bold;font-size:18px">{{{Precio}}}&euro; {{UnidadMedidaProveedor}}</span></div>
+        <div class="resultDescription"><span style="color:grey;font-weight:bold;font-size:18px">{{{Precio}}}&euro; {{UnidadMedidaProveedor}} <span style="color:grey;font-size:12px"> ({{{PrecioPorUnidad}}}&euro; {{UnidadMedidaPrecio}})</span></span><span style="color:orange;font-size:12"> {{MejorPrecio}} </span></div>
+        <div class="resultDescription"></span> </div>
         <hr width="100%" size="1" color="grey" noshade style="margin-bottom:0px; ">
         </div>`;
 
@@ -157,15 +162,18 @@
     automagic.store.setSuggestionsProcessor(suggestionsProcessor);
 
     var suggestionsTemplate = `
-             <p> {{Proveedor}} </p> {{{searchText}}}`;
+    <p>{{{searchText}}} </p> 
+    <p>{{NombreProducto}}</p>
+    <div class="resultDescription">{{{DescripcionProveedor}}} <span style="color:grey;font-weight:bold;"> - {{{IDProducto}}}  </span></div>
+    <div class="resultDescription"><span style="color:grey;font-weight:bold;font-size:18px">{{{Precio}}}&euro; {{UnidadMedidaProveedor}} <span style="color:grey;font-size:12px"> ({{{PrecioPorUnidad}}}&euro; {{UnidadMedidaPrecio}})</span></span><span style="color:orange;font-size:12"> {{MejorPrecio}} </span></div> `;
 
     // Add a search box that uses suggester "azuresql-index-sg", grabbing some additional fields to display during suggestions. Use the template defined above
     automagic.addSearchBox("searchBox",
         {
             highlightPreTag: "<b>",
             highlightPostTag: "</b>",
-            suggesterName: "azuresql-index-sg",
-            select: "NombreProducto, Proveedor"
+            suggesterName: "azuresql-index-test-sg",
+            select: "NombreProducto, DescripcionProveedor, IDProducto, Proveedor, Precio, UnidadMedidaProveedor, MejorPrecio, PrecioPorUnidad, UnidadMedidaPrecio"
         },
         "",
         suggestionsTemplate);
@@ -190,6 +198,8 @@
    automagic.addCheckboxFacet("GrupoFacet", "Grupo", "string");
 
    automagic.addCheckboxFacet("ProveedorFacet", "Proveedor", "string");
+   
+   automagic.addCheckboxFacet("MejorPrecioFacet", "MejorPrecio", "string");
 
 
     // Adds a button to clear any applied filters
